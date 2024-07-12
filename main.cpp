@@ -121,6 +121,18 @@ struct RecordingStudio
     void sendInvoice();
     void hostEvent();
     void recordAudio();
+
+    Facility chargeCleaningFee( int start = 0, int laborFee = 10 )
+    {
+        Facility c(start);
+        while( c.hoursBooked <= 10 )
+        {
+            ++c.hoursBooked;
+            std::cout << "Labor fee added: " << c.hoursBooked + laborFee << std::endl;
+                return c;                
+        }
+        return Facility {-1};
+    }
 };
 
 RecordingStudio::ControlRoom::ControlRoom()
@@ -136,18 +148,6 @@ RecordingStudio::RecordingStudio()
 void RecordingStudio::recordAudio()
 {
      std::cout << "Max number of mics allowed: " << microphones << std::endl;   
-}
-
-Facility chargeCleaningFee( int start = 0, int laborFee = 10 )
-{
-    Facility c(start);
-    while( c.hoursBooked <= 10 )
-    {
-        ++c.hoursBooked;
-        std::cout << "Labor fee added: " << c.hoursBooked + laborFee << std::endl;
-            return c;                
-    }
-    return Facility {-1};
 }
 
 void RecordingStudio::beginRecordingSession( ControlRoom controlRoomA)
