@@ -81,10 +81,23 @@ write 3 UDTs below that EACH have:
 
 struct Facility
 {
-    Facility ( int c) : hoursBooked(c) { std::cout << "Facility ctor" << std::endl; }
+    Facility ( int c = 1 ) : hoursBooked(c) { std::cout << "Facility ctor" << std::endl; }
     int hoursBooked = 8;
     ~Facility () { std::cout << "Facility dtor" << std::endl; }
+
+    int chargeCleaningFee( int start, int laborFee );
 };
+
+int Facility::chargeCleaningFee( int start, int laborFee )
+{
+    Facility c(start);
+    while( c.hoursBooked <= 10 )
+    {
+        ++c.hoursBooked;
+        return c.hoursBooked + laborFee;      
+    }
+    return 0;
+}
 
 struct RecordingStudio
 {
@@ -121,18 +134,6 @@ struct RecordingStudio
     void sendInvoice();
     void hostEvent();
     void recordAudio();
-
-    Facility chargeCleaningFee( int start = 0, int laborFee = 10 )
-    {
-        Facility c(start);
-        while( c.hoursBooked <= 10 )
-        {
-            ++c.hoursBooked;
-            std::cout << "Labor fee added: " << c.hoursBooked + laborFee << std::endl;
-                return c;                
-        }
-        return Facility {-1};
-    }
 };
 
 void RecordingStudio::recordAudio()
@@ -445,8 +446,8 @@ int main()
 
     std::cout << "Is purple's member variable 'rides' equal to 5? " << (purple.rides == 5 ? " Yes" : " No") << "\n" << std::endl;
 
-    RecordingStudio allStudios;
-    allStudios.chargeCleaningFee( 0, 10);
+    Facility allStudios;
+    allStudios.chargeCleaningFee( 1, 10);
 
     RecordingStudio soundbylaura;//NTS: Creates an instance of the RecordingStudio struct named soundbylaura.
     RecordingStudio::ControlRoom  controlRoomB;//NTS: Creates an instance of the nested RecordingStudio::ControlRoom struct named controlRoomB.
