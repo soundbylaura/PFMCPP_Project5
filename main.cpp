@@ -190,7 +190,7 @@ void RecordingStudio::ControlRoom::prepareRoom( bool powerOn, bool roomCleaned, 
     {
         numberOfAssistants = 1;
     }
-    std::cout << "Constructors give us a way to set up the values of member variables with valid values." << std::endl;
+    std::cout << "prepRoom func: Constructors give us a way to set up the values of member variables with valid values." << std::endl;
 }
 
 float RecordingStudio::ControlRoom::caclulateTotalFee( float numberOfActualHours, float overtimeRate, float reelsUsed)
@@ -228,9 +228,9 @@ struct StereoWidenerAudioPlugin
 {
     StereoWidenerAudioPlugin() : fontSizeToolTips(18)
     {
-        std::cout << "StereoWidenerAudioPlugin ctor" << std::endl;
+        std::cout << "SWAP ctor" << std::endl;
     }
-    ~StereoWidenerAudioPlugin() { }
+    ~StereoWidenerAudioPlugin() { std::cout << "SWAP dtor" << std::endl; }
     int interfaceElements;
     std::string knobsColors = "Black";
     float memoryAllocated { 64.0f };
@@ -244,7 +244,7 @@ struct StereoWidenerAudioPlugin
         {
             std::cout << "MixKnob ctor" << std::endl;
         }
-        ~MixKnob() { }
+        ~MixKnob() { std::cout << "MixKnob dtor" << std::endl; }
         std::string label = "Mix";
         int sliderHeight = 10; 
         int sliderWidth = 2;
@@ -295,7 +295,7 @@ void StereoWidenerAudioPlugin::MixKnob::getStateInformation( int sizeInBytes, fl
     {
         inputLevel = 0.0f;
     }
-    std::cout << "Writing the name of the Type with (); creates the constructor." << std::endl;
+    std::cout << "getState func: Writing the name of the Type with (); creates the constructor." << std::endl;
 }
 void StereoWidenerAudioPlugin::MixKnob::prepareToPlay( double sampleRate, int samplesPerBlock)
 {
@@ -323,13 +323,13 @@ bool StereoWidenerAudioPlugin::MixKnob::getBypassState( bool customBypassButton,
 
 void StereoWidenerAudioPlugin::captureAudio()
 {
-    std::cout << "Constructors don't have a return type, not even VOID." << std::endl;
+    std::cout << "captureAudio func: Constructors don't have a return type, not even VOID." << std::endl;
 }
 char StereoWidenerAudioPlugin::addTextInfo() { return 't'; }
 float StereoWidenerAudioPlugin::widenSignal() { return 100.0f; }
 void StereoWidenerAudioPlugin::MixKnob::calculateTickMarks()
 {
-    std::cout << "Ticks number: " << ticksOnSlider << std::endl;
+    std::cout << "calcTicksNum func: Ticks number: " << ticksOnSlider << std::endl;
 }
 
 void StereoWidenerAudioPlugin::MixKnob::useSaturation()
@@ -348,7 +348,7 @@ void StereoWidenerAudioPlugin::showPluginWindow( float mem)
     {
         ++mem;
         if( mem >= memoryAllocated )
-            std::cout << "Welcome to SWAP" << std::endl;
+            std::cout << "showPlugWin func: Welcome to SWAP" << std::endl;
     }
 }
 /*
@@ -449,19 +449,19 @@ int main()
     RecordingStudio soundbylaura;//Note to self: Creates an instance of the RecordingStudio struct named soundbylaura.
     RecordingStudio::ControlRoom  controlRoomB;//Note to self: Creates an instance of the nested RecordingStudio::ControlRoom struct named controlRoomB.
 
-    controlRoomB.bookRoom( true, 5);
+    // controlRoomB.bookRoom( true, 5);
     controlRoomB.prepareRoom( true, true, 1, 5.0f); 
-    controlRoomB.caclulateTotalFee( 12.0f, 650.50f, 4.0f);
-    controlRoomB.resetLights ( 10);
+    // controlRoomB.caclulateTotalFee( 12.0f, 650.50f, 4.0f);
+    controlRoomB.resetLights ( 10); //NTS: this is the function that is calling the ctor&dtor 10 times
     //Note to self: Don't forget, calling functions that have arguments here expect direct values, not type declarations.
 
 
     std::cout << "Is the room being prepped?" << (controlRoomB.isBooked == true ? " Yes" : " No") << "\n" << std::endl;   
 
-    soundbylaura.beginRecordingSession( controlRoomB);
-    soundbylaura.startRateClock( true);
-    soundbylaura.closeRoom( controlRoomB, true);
-    soundbylaura.billClient( controlRoomB, 12, 3, 3);
+    // soundbylaura.beginRecordingSession( controlRoomB);
+    // soundbylaura.startRateClock( true);
+    // soundbylaura.closeRoom( controlRoomB, true);
+    // soundbylaura.billClient( controlRoomB, 12, 3, 3);
 
     soundbylaura.hostEvent();
     soundbylaura.recordAudio();
@@ -474,13 +474,13 @@ int main()
     StereoWidenerAudioPlugin::MixKnob mix;
 
     SBLWide.captureAudio();
-    SBLWide.addTextInfo();
-    SBLWide.widenSignal();
+    // SBLWide.addTextInfo();
+    // SBLWide.widenSignal();
     SBLWide.showPluginWindow( 64.0f);
 
-    SBLWide.increaseWetness( mix);
-    SBLWide.decreaseWetness( mix);
-    SBLWide.engageSmartMute( 1, 1.1f);
+    // SBLWide.increaseWetness( mix);
+    // SBLWide.decreaseWetness( mix);
+    // SBLWide.engageSmartMute( 1, 1.1f);
 
     std::cout << "This knob color should be: " << (SBLWide.knobsColors) << "\n" << std::endl;
 
