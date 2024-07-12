@@ -81,9 +81,9 @@ write 3 UDTs below that EACH have:
 
 struct Facility
 {
-    Facility ( int c) : hoursBooked(c) { }
+    Facility ( int c) : hoursBooked(c) { std::cout << "Facility ctor" << std::endl; }
     int hoursBooked = 8;
-    ~Facility () { }
+    ~Facility () { std::cout << "Facility dtor" << std::endl; }
 };
 
 struct RecordingStudio
@@ -221,6 +221,8 @@ void RecordingStudio::ControlRoom::resetLights ( int hoursTotal)
     }
     std::cout << "Lights reset after " << hoursTotal << " hours." << std::endl;
 }
+
+
 /*
  copied UDT 2:
  */
@@ -432,8 +434,8 @@ void Bicycle::Spokes::repairSpokes( int spokeNumber )
 
 int main()
 {
-    Bicycle purple; //Note to self: I am instantiating a UDT named 'purple' in the main()
-    purple.transportPerson(); //Note to self:  I am calling the member functions of the UDT instance
+    Bicycle purple; //NTS: I am instantiating a UDT named 'purple' in the main()
+    purple.transportPerson(); //NTS: I am calling the member functions of the UDT instance
     purple.rollDownhill();
     purple.makeRepairs();
 
@@ -446,14 +448,14 @@ int main()
     RecordingStudio allStudios;
     allStudios.chargeCleaningFee( 0, 10);
 
-    RecordingStudio soundbylaura;//Note to self: Creates an instance of the RecordingStudio struct named soundbylaura.
-    RecordingStudio::ControlRoom  controlRoomB;//Note to self: Creates an instance of the nested RecordingStudio::ControlRoom struct named controlRoomB.
+    RecordingStudio soundbylaura;//NTS: Creates an instance of the RecordingStudio struct named soundbylaura.
+    RecordingStudio::ControlRoom  controlRoomB;//NTS: Creates an instance of the nested RecordingStudio::ControlRoom struct named controlRoomB.
 
     // controlRoomB.bookRoom( true, 5);
     controlRoomB.prepareRoom( true, true, 1, 5.0f); 
     // controlRoomB.caclulateTotalFee( 12.0f, 650.50f, 4.0f);
     controlRoomB.resetLights ( 10); //NTS: this is the function that is calling the ctor&dtor 10 times
-    //Note to self: Don't forget, calling functions that have arguments here expect direct values, not type declarations.
+    //NTS: Don't forget, calling functions that have arguments here expect direct values, not type declarations.
 
 
     std::cout << "Is the room being prepped?" << (controlRoomB.isBooked == true ? " Yes" : " No") << "\n" << std::endl;   
