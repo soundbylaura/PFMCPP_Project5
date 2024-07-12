@@ -411,11 +411,39 @@ void Bicycle::Spokes::repairSpokes( int spokeNumber )
  new UDT 4:
  with 2 member functions
  */
+struct BigBoxStore
+{
+    BigBoxStore() { std::cout << "BigBoxStore ctor" << std::endl; }
+    ~BigBoxStore() { std::cout << "BigBoxStore dtor" << std::endl; }
+
+    Bicycle newBikes;
+    Bicycle newCustomer;
+    Bicycle::Spokes sparklySpokes;
+
+    void sellNewBikes();
+    bool installSparklySpokes();
+};
+
 
 /*
  new UDT 5:
  with 2 member functions
  */
+struct FancEQ
+{
+    FancEQ() { std::cout << "FancEQ ctor" << std::endl; }
+    ~FancEQ() { std::cout << "FancEQ ctor" << std::endl; }
+
+    RecordingStudio newCustomer;
+    RecordingStudio::ControlRoom controlRoomD;
+    StereoWidenerAudioPlugin plugin;
+    StereoWidenerAudioPlugin::MixKnob defaultKnob;
+
+    bool useDefaultKnob();
+    void addNewCustomer();
+};
+
+
 
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
@@ -494,6 +522,11 @@ int main()
     mix.useSaturation();
 
     std::cout << "The name of this knob should be: " << (mix.label) << "\n" << std::endl;
+
+    // BigBoxStore walmazon;
+    // walmazon.sellNewBikes();
+    // walmazon.installSparklySpokes();
+
 
     std::cout << "good to go!" << std::endl;
 }
