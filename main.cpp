@@ -88,8 +88,8 @@ struct Facility
 
 struct RecordingStudio
 {
-    RecordingStudio();
-    ~RecordingStudio() { }
+    RecordingStudio() { std::cout << "RecordingStudio ctor" << std::endl; }
+    ~RecordingStudio() { std::cout << "RecordingStudio dtor" << std::endl; }
     int microphones = 28;
     int numOfClients = 33;
     float expenseCatering { 300.0f };
@@ -99,8 +99,8 @@ struct RecordingStudio
 
     struct ControlRoom
     {
-        ControlRoom();
-        ~ControlRoom() { }
+        ControlRoom() { std::cout << "ControlRoom ctor" << std::endl; }
+        ~ControlRoom() { std::cout << "ControlRoom dtor" << std::endl; }
         bool isBooked = false;
         float ratePerHour = 500.0f;
         std::string consoleType = "Analog";
@@ -134,16 +134,6 @@ struct RecordingStudio
         return Facility {-1};
     }
 };
-
-RecordingStudio::ControlRoom::ControlRoom()
-{
-   std::cout << "ControlRoom" << std::endl; 
-}
-
-RecordingStudio::RecordingStudio()
-{
-    std::cout << "RecordingStudio" << std::endl;
-}
 
 void RecordingStudio::recordAudio()
 {
@@ -236,7 +226,10 @@ void RecordingStudio::ControlRoom::resetLights ( int hoursTotal)
  */
 struct StereoWidenerAudioPlugin
 {
-    StereoWidenerAudioPlugin();
+    StereoWidenerAudioPlugin() : fontSizeToolTips(18)
+    {
+        std::cout << "StereoWidenerAudioPlugin ctor" << std::endl;
+    }
     ~StereoWidenerAudioPlugin() { }
     int interfaceElements;
     std::string knobsColors = "Black";
@@ -247,7 +240,10 @@ struct StereoWidenerAudioPlugin
 
     struct MixKnob
     {
-        MixKnob();
+        MixKnob() : ticksOnSlider(80)
+        {
+            std::cout << "MixKnob ctor" << std::endl;
+        }
         ~MixKnob() { }
         std::string label = "Mix";
         int sliderHeight = 10; 
@@ -272,16 +268,6 @@ struct StereoWidenerAudioPlugin
     float widenSignal();
     void showPluginWindow( float mem); //NTS: new member function added for S&L task
 };
-
-StereoWidenerAudioPlugin::MixKnob::MixKnob() : ticksOnSlider(80)
-{
-    std::cout << "MixKnob" << std::endl;
-}
-
-StereoWidenerAudioPlugin::StereoWidenerAudioPlugin() : fontSizeToolTips(18)
-{
-    std::cout << "StereoWidenerAudioPlugin" << std::endl;
-}
 
 void StereoWidenerAudioPlugin::increaseWetness( MixKnob increase)
 {
@@ -370,8 +356,8 @@ void StereoWidenerAudioPlugin::showPluginWindow( float mem)
  */
 struct Bicycle
 {
-    Bicycle();
-    ~Bicycle() { }
+    Bicycle() { std::cout << "Bicycle ctor" << std::endl; }
+    ~Bicycle() { std::cout << "Bicycle dtor" << std::endl; }
     int numGears = 21;
     float tireAirPressure { 70.0f }; //a member variable that IS initialized in-class
     std::string handlebar = "Flat"; //a member variable that IS initialized in-class
@@ -380,30 +366,18 @@ struct Bicycle
 
     struct Spokes
     {
-        Spokes();
-        ~Spokes() { }
+        Spokes() { std::cout << "Spokes ctor" << std::endl; }
+        ~Spokes() { std::cout << "Spokes dtor" << std::endl; }
         int maxNumSpokes = 8;
         int minNumSpokes = 0;
 
         void repairSpokes( int spokeNumber );  //NTS: new member function added for S&L task
-
     };
 
     void transportPerson();
     void rollDownhill();
     void makeRepairs();
-
 };
-
-Bicycle::Bicycle()
-{
-    std::cout << "Bicycle" << std::endl;
-}
-
-Bicycle::Spokes::Spokes()
-{
-    std::cout << "Spokes" << std::endl;
-}
 
 void Bicycle::makeRepairs()
 {
@@ -455,12 +429,14 @@ void Bicycle::Spokes::repairSpokes( int spokeNumber )
  */
 
 #include <iostream>
+
 int main()
 {
     Bicycle purple; //Note to self: I am instantiating a UDT named 'purple' in the main()
     purple.transportPerson(); //Note to self:  I am calling the member functions of the UDT instance
     purple.rollDownhill();
     purple.makeRepairs();
+
 
     Bicycle::Spokes wheel;
     wheel.repairSpokes ( 0 );
