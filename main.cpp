@@ -83,11 +83,13 @@ struct Facility
 {
     Facility ( int c) : hoursBooked(c) { }
     int hoursBooked = 8;
+    ~Facility () { }
 };
 
 struct RecordingStudio
 {
     RecordingStudio();
+    ~RecordingStudio() { }
     int microphones = 28;
     int numOfClients = 33;
     float expenseCatering { 300.0f };
@@ -98,6 +100,7 @@ struct RecordingStudio
     struct ControlRoom
     {
         ControlRoom();
+        ~ControlRoom() { }
         bool isBooked = false;
         float ratePerHour = 500.0f;
         std::string consoleType = "Analog";
@@ -234,6 +237,7 @@ void RecordingStudio::ControlRoom::resetLights ( int hoursTotal)
 struct StereoWidenerAudioPlugin
 {
     StereoWidenerAudioPlugin();
+    ~StereoWidenerAudioPlugin() { }
     int interfaceElements;
     std::string knobsColors = "Black";
     float memoryAllocated { 64.0f };
@@ -244,6 +248,7 @@ struct StereoWidenerAudioPlugin
     struct MixKnob
     {
         MixKnob();
+        ~MixKnob() { }
         std::string label = "Mix";
         int sliderHeight = 10; 
         int sliderWidth = 2;
@@ -365,7 +370,8 @@ void StereoWidenerAudioPlugin::showPluginWindow( float mem)
  */
 struct Bicycle
 {
-    Bicycle(); 
+    Bicycle();
+    ~Bicycle() { }
     int numGears = 21;
     float tireAirPressure { 70.0f }; //a member variable that IS initialized in-class
     std::string handlebar = "Flat"; //a member variable that IS initialized in-class
@@ -375,6 +381,7 @@ struct Bicycle
     struct Spokes
     {
         Spokes();
+        ~Spokes() { }
         int maxNumSpokes = 8;
         int minNumSpokes = 0;
 
