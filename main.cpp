@@ -457,5 +457,64 @@ void Bicycle::Spokes::repairSpokes( int spokeNumber )
 #include <iostream>
 int main()
 {
+    Bicycle purple; //Note to self: I am instantiating a UDT named 'purple' in the main()
+    purple.transportPerson(); //Note to self:  I am calling the member functions of the UDT instance
+    purple.rollDownhill();
+    purple.makeRepairs();
+
+    Bicycle::Spokes wheel;
+    wheel.repairSpokes ( 0 );
+
+    std::cout << "Is purple's member variable 'rides' equal to 5? " << (purple.rides == 5 ? " Yes" : " No") << "\n" << std::endl;
+
+    RecordingStudio allStudios;
+    allStudios.chargeCleaningFee( 0, 10);
+
+    RecordingStudio soundbylaura;//Note to self: Creates an instance of the RecordingStudio struct named soundbylaura.
+    RecordingStudio::ControlRoom  controlRoomB;//Note to self: Creates an instance of the nested RecordingStudio::ControlRoom struct named controlRoomB.
+
+    controlRoomB.bookRoom( true, 5);
+    controlRoomB.prepareRoom( true, true, 1, 5.0f); 
+    controlRoomB.caclulateTotalFee( 12.0f, 650.50f, 4.0f);
+    controlRoomB.resetLights ( 10);
+    //Note to self: Don't forget, calling functions that have arguments here expect direct values, not type declarations.
+
+
+    std::cout << "Is the room being prepped?" << (controlRoomB.isBooked == true ? " Yes" : " No") << "\n" << std::endl;   
+
+    soundbylaura.beginRecordingSession( controlRoomB);
+    soundbylaura.startRateClock( true);
+    soundbylaura.closeRoom( controlRoomB, true);
+    soundbylaura.billClient( controlRoomB, 12, 3, 3);
+
+    soundbylaura.hostEvent();
+    soundbylaura.recordAudio();
+    soundbylaura.sendInvoice();
+
+    std::cout << "Are we hosting an event today:" << (soundbylaura.employees == 0 ? " Yes" : " No") << "\n" << std::endl;
+
+
+    StereoWidenerAudioPlugin SBLWide;
+    StereoWidenerAudioPlugin::MixKnob mix;
+
+    SBLWide.captureAudio();
+    SBLWide.addTextInfo();
+    SBLWide.widenSignal();
+    SBLWide.showPluginWindow( 64.0f);
+
+    SBLWide.increaseWetness( mix);
+    SBLWide.decreaseWetness( mix);
+    SBLWide.engageSmartMute( 1, 1.1f);
+
+    std::cout << "This knob color should be: " << (SBLWide.knobsColors) << "\n" << std::endl;
+
+    mix.getStateInformation(int (256), float (0.0f));
+    mix.prepareToPlay( 44100.0, 256.0f);
+    mix.getBypassState( false, false);
+    mix.calculateTickMarks();
+    mix.useSaturation();
+
+    std::cout << "The name of this knob should be: " << (mix.label) << "\n" << std::endl;
+
     std::cout << "good to go!" << std::endl;
 }
