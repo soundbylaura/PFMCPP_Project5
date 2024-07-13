@@ -363,9 +363,9 @@ struct Bicycle
     ~Bicycle() { std::cout << "Bicycle dtor" << std::endl; }
     int numGears = 21;
     float tireAirPressure { 70.0f }; //a member variable that IS initialized in-class
-    std::string handlebar = "Flat"; //a member variable that IS initialized in-class
+    std::string handlebar = "Flat";
     int bottleHolders = 2;
-    int rides = { 5 }; //a member variable that IS initialized in-class
+    int rides = { 5 }; 
 
     struct Spokes
     {
@@ -422,7 +422,6 @@ struct BigBoxStore
 
     Bicycle newBikes;
     Bicycle::Spokes sparklySpokes;
-
 
     void sellNewBikes();
     bool installSparklySpokes( bool newCustomer, bool newSpokes);
