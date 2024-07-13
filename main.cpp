@@ -374,7 +374,7 @@ struct Bicycle
         int maxNumSpokes = 8;
         int minNumSpokes = 0;
 
-        void repairSpokes( int spokeNumber );  //NTS: new member function added for S&L task
+        void repairSpokes( int spokeNumber );
     };
 
     void transportPerson();
@@ -414,16 +414,33 @@ void Bicycle::Spokes::repairSpokes( int spokeNumber )
 struct BigBoxStore
 {
     BigBoxStore() { std::cout << "BigBoxStore ctor" << std::endl; }
-    ~BigBoxStore() { std::cout << "BigBoxStore dtor" << std::endl; }
+    ~BigBoxStore()
+    {
+        sparklySpokes.repairSpokes(12);
+        std::cout << "Sparkly spokes added via the BBS dtor" << std::endl;
+    }
 
     Bicycle newBikes;
-    Bicycle newCustomer;
     Bicycle::Spokes sparklySpokes;
 
+
     void sellNewBikes();
-    bool installSparklySpokes();
+    bool installSparklySpokes( bool newCustomer, bool newSpokes);
 };
 
+void BigBoxStore::sellNewBikes()
+{
+    std::cout << "Selling new bikes: " << newBikes.bottleHolders << std::endl;
+}
+
+bool BigBoxStore::installSparklySpokes( bool newCustomer,  bool newSpokes)
+{
+    if( newCustomer == true )
+    { 
+        newSpokes = true;
+    }
+    return true;
+}
 
 /*
  new UDT 5:
@@ -523,9 +540,9 @@ int main()
 
     std::cout << "The name of this knob should be: " << (mix.label) << "\n" << std::endl;
 
-    // BigBoxStore walmazon;
-    // walmazon.sellNewBikes();
-    // walmazon.installSparklySpokes();
+    BigBoxStore walmazon;
+    walmazon.sellNewBikes();
+    walmazon.installSparklySpokes( true,  true);
 
 
     std::cout << "good to go!" << std::endl;
