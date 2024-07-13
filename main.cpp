@@ -449,16 +449,34 @@ bool BigBoxStore::installSparklySpokes( bool newCustomer,  bool newSpokes)
 struct FancEQ
 {
     FancEQ() { std::cout << "FancEQ ctor" << std::endl; }
-    ~FancEQ() { std::cout << "FancEQ ctor" << std::endl; }
+    ~FancEQ()
+    {
+        defaultKnob.useSaturation();
+        std::cout << "Purple knob adds saturation via the FancEQ dtor" << std::endl;
+    }
 
     RecordingStudio newCustomer;
     RecordingStudio::ControlRoom controlRoomD;
     StereoWidenerAudioPlugin plugin;
     StereoWidenerAudioPlugin::MixKnob defaultKnob;
 
-    bool useDefaultKnob();
+    bool useDefaultKnob( bool grayKnob, bool purpleKnob);
     void addNewCustomer();
 };
+
+bool FancEQ::useDefaultKnob( bool newKnob, bool purpleKnob)
+{
+    if( newKnob == false )
+    {
+        purpleKnob = true;
+    }
+    return false;
+}
+
+void FancEQ::addNewCustomer()
+{
+    std::cout << "Adding new customer: " << newCustomer.numOfClients << std::endl;
+}
 
 
 
@@ -544,6 +562,9 @@ int main()
     walmazon.sellNewBikes();
     walmazon.installSparklySpokes( true,  true);
 
+    FancEQ instance;
+    instance.useDefaultKnob( false, true);
+    instance.addNewCustomer();
 
     std::cout << "good to go!" << std::endl;
 }
