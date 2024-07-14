@@ -99,7 +99,8 @@ int Facility::chargeCleaningFee( int start, int laborFee )
     while( c.hoursBooked <= 10 )
     {
         ++c.hoursBooked;
-        return c.hoursBooked + laborFee;      
+        std::cout << "Add cleaning fees after " << this->hoursBooked << " hours." << std::endl;
+        return c.hoursBooked + laborFee;
     }
     return 0;
 }
