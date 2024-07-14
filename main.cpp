@@ -537,7 +537,9 @@ int main()
     RecordingStudio soundbylaura;//NTS: Creates an instance of the RecordingStudio struct named soundbylaura.
     RecordingStudio::ControlRoom  controlRoomB;//NTS: Creates an instance of the nested RecordingStudio::ControlRoom struct named controlRoomB.
 
-    // controlRoomB.bookRoom( true, 5);
+    controlRoomB.bookRoom( true, 5);
+    std::cout << "Room booked " << controlRoomB.isBooked << "at $" << controlRoomB.ratePerHour << " dollars/hr." << std::endl;
+    
     controlRoomB.prepareRoom( true, true, 1, 5.0f); 
     // controlRoomB.caclulateTotalFee( 12.0f, 650.50f, 4.0f);
     controlRoomB.resetLights ( 10); //NTS: this is the function that is calling the ctor&dtor 10 times
