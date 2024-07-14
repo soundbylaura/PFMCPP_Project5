@@ -389,7 +389,7 @@ struct Bicycle
 
 void Bicycle::makeRepairs()
 {
-    std::cout << "Make repairs after this many rides: " << rides << std::endl;
+    std::cout << "Waterbottle holders installed: " << this->bottleHolders << std::endl;
 }
 
 void Bicycle::transportPerson()
@@ -401,7 +401,6 @@ void Bicycle::rollDownhill()
 {
     std::cout << "Roll downhill initial ppi: " << tireAirPressure << ". Required bottle holders: " << bottleHolders << std::endl; //making a member function use initialized member variables via std::cout
 }
-
 
 
 void Bicycle::Spokes::repairSpokes( int spokeNumber )
