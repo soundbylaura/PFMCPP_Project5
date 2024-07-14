@@ -447,6 +447,8 @@ bool BigBoxStore::installSparklySpokes( bool newCustomer,  bool newSpokes)
     return true;
 }
 
+
+
 /*
  new UDT 5:
  with 2 member functions
@@ -468,6 +470,8 @@ struct FancEQ
     bool useDefaultKnob( bool grayKnob, bool purpleKnob);
     void addNewCustomer();
 };
+
+
 
 bool FancEQ::useDefaultKnob( bool newKnob, bool purpleKnob)
 {
@@ -518,6 +522,8 @@ int main()
 
     Facility allStudios;
     allStudios.chargeCleaningFee( 1, 10);
+
+    std::cout << "Add cleaning fee after " << allStudios.hoursBooked << " hours." << std::endl;
 
     RecordingStudio soundbylaura;//NTS: Creates an instance of the RecordingStudio struct named soundbylaura.
     RecordingStudio::ControlRoom  controlRoomB;//NTS: Creates an instance of the nested RecordingStudio::ControlRoom struct named controlRoomB.
