@@ -566,9 +566,16 @@ int main()
     walmazon.sellNewBikes();
     walmazon.installSparklySpokes( true,  true);
 
+    std::cout << "How many gears do the new bikes have? " << (walmazon.newBikes.numGears) << "\n" << std::endl;
+
+    
+    // std::cout << "Is the store selling new bikes?" << (walmazon.newBikes) << "\n" << std::endl;
+
     FancEQ instance;
     instance.useDefaultKnob( false, true);
     instance.addNewCustomer();
+
+    std::cout << "The number of new customers is: " << (instance.newCustomer.numOfClients) + 1 << "\n" << std::endl;
 
     std::cout << "good to go!" << std::endl;
 }
