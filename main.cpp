@@ -265,7 +265,7 @@ struct StereoWidenerAudioPlugin
         void prepareToPlay( double sampleRate, int samplesPerBlock);
         bool getBypassState( bool customBypassButton, bool nativeBypassButton);
         void calculateTickMarks();
-        void useSaturation(); //NTS: new member function added for S&L task
+        void useSaturation(); 
     };
 
     void increaseWetness( MixKnob increase);
@@ -275,7 +275,7 @@ struct StereoWidenerAudioPlugin
     void captureAudio();
     char addTextInfo();
     float widenSignal();
-    void showPluginWindow( float mem); //NTS: new member function added for S&L task
+    void showPluginWindow( float mem);
 };
 
 void StereoWidenerAudioPlugin::increaseWetness( MixKnob increase)
@@ -381,6 +381,7 @@ struct Bicycle
         int minNumSpokes = 0;
 
         void repairSpokes( int spokeNumber );
+        void replaceSpokes();
     };
 
     void transportPerson();
@@ -414,6 +415,12 @@ void Bicycle::Spokes::repairSpokes( int spokeNumber )
             std::cout << "All spokes fixed." << std::endl;
     } 
 }
+
+void Bicycle::Spokes::replaceSpokes()
+{
+    std::cout << "# of spokes replaced: " << this->maxNumSpokes << std::endl;
+}
+
 /*
  new UDT 4:
  with 2 member functions
@@ -473,7 +480,6 @@ struct FancEQ
 };
 
 
-
 bool FancEQ::useDefaultKnob( bool newKnob, bool purpleKnob)
 {
     if( newKnob == false )
@@ -518,6 +524,8 @@ int main()
 
     Bicycle::Spokes wheel;
     wheel.repairSpokes ( 0 );
+    wheel.replaceSpokes();
+    std::cout << "Spokes replaced: " << wheel.maxNumSpokes << std::endl;
 
     std::cout << "Is purple's member variable 'rides' equal to 5? " << (purple.rides == 5 ? " Yes" : " No") << "\n" << std::endl;
 
