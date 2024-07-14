@@ -402,6 +402,8 @@ void Bicycle::rollDownhill()
     std::cout << "Roll downhill initial ppi: " << tireAirPressure << ". Required bottle holders: " << bottleHolders << std::endl; //making a member function use initialized member variables via std::cout
 }
 
+
+
 void Bicycle::Spokes::repairSpokes( int spokeNumber )
 {
     while( spokeNumber < 8)
@@ -506,6 +508,8 @@ int main()
     purple.transportPerson(); //NTS: I am calling the member functions of the UDT instance
     purple.rollDownhill();
     purple.makeRepairs();
+
+    std::cout << "Water bottle holders installed: " << purple.bottleHolders << std::endl;
 
 
     Bicycle::Spokes wheel;
