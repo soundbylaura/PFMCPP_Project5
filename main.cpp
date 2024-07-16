@@ -232,7 +232,7 @@ void RecordingStudio::ControlRoom::resetLights ( int hoursTotal)
     }
     std::cout << "Lights reset after " << hoursTotal << " hours." << std::endl;
 }
-
+//small change
 
 /*
  copied UDT 2:
