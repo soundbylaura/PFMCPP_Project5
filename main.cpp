@@ -179,6 +179,7 @@ void RecordingStudio::ControlRoom::bookRoom( bool isRoomBooked, int numberOfTota
     if( isRoomBooked == true )
     {
         numberOfTotalClients = 2;
+        std::cout << "Room booked " << this->isBooked << "at $" << this->ratePerHour << " dollars/min." << std::endl;
     }
     else
     {
@@ -213,7 +214,10 @@ float RecordingStudio::ControlRoom::caclulateTotalFee( float numberOfActualHours
     return ( overtimeRate * numberOfActualHours) + reelsUsed;  
 }
 
-void RecordingStudio::sendInvoice(){}
+void RecordingStudio::sendInvoice()
+{
+    std::cout << "Are we hosting an event tomorrow:" << (this->employees == 0 ? " Yes" : " No") << "\n" << std::endl;
+}
 void RecordingStudio::hostEvent()
 {
     std::cout << "After the compiler allocates the space required by the type, it calls a special function called the constructor." << std::endl;
@@ -333,12 +337,14 @@ bool StereoWidenerAudioPlugin::MixKnob::getBypassState( bool customBypassButton,
 void StereoWidenerAudioPlugin::captureAudio()
 {
     std::cout << "captureAudio func: Constructors don't have a return type, not even VOID." << std::endl;
+    std::cout << "That knob color should be: " << this->knobsColors << "\n" << std::endl;
 }
 char StereoWidenerAudioPlugin::addTextInfo() { return 't'; }
 float StereoWidenerAudioPlugin::widenSignal() { return 100.0f; }
 void StereoWidenerAudioPlugin::MixKnob::calculateTickMarks()
 {
     std::cout << "calcTicksNum func: Ticks number: " << ticksOnSlider << std::endl;
+    std::cout << "The name of that knob should be: " << this->label << "\n" << std::endl;
 }
 
 void StereoWidenerAudioPlugin::MixKnob::useSaturation()
@@ -451,6 +457,7 @@ bool BigBoxStore::installSparklySpokes( bool newCustomer,  bool newSpokes)
     if( newCustomer == true )
     { 
         newSpokes = true;
+        std::cout << "How many gears do the old bikes have? " << this->newBikes.numGears << "\n" << std::endl;
     }
     return true;
 }
@@ -485,6 +492,7 @@ bool FancEQ::useDefaultKnob( bool newKnob, bool purpleKnob)
     if( newKnob == false )
     {
         purpleKnob = true;
+        std::cout << "The # of new customers is: " << this->newCustomer.numOfClients + 1 << "\n" << std::endl;
     }
     return false;
 }
