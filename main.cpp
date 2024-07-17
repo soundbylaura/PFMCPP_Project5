@@ -86,22 +86,26 @@ namespace Example
 
 struct Facility
 {
-    Facility ( int c = 1 ) : hoursBooked(c) { std::cout << "Facility ctor" << std::endl; }
-    int hoursBooked = 8;
+    Facility ( int c = 20 ) : hoursBooked(c) { std::cout << "Facility ctor" << std::endl; }
+    int hoursBooked;
+    int threshold = 8;
+    int laborFee = 100;
+    int facilityFee = 110;
     ~Facility () { std::cout << "Facility dtor" << std::endl; }
 
-    int chargeCleaningFee( int start, int laborFee );
+    int chargeCleaningFee( int start, int cleaningFee );
 };
 
-int Facility::chargeCleaningFee( int start, int laborFee )
+int Facility::chargeCleaningFee( int start, int cleaningFee )
 {
     Facility c(start);
     while( c.hoursBooked <= 10 )
     {
         ++c.hoursBooked;
+        if ( c.hoursBooked >= threshold )
         std::cout << "Add cleaning fees after " << this->hoursBooked << " hours." << std::endl;
-        return c.hoursBooked + laborFee;
     }
+    std::cout << "Total fees: $" << hoursBooked * (facilityFee + cleaningFee) << std::endl;
     return 0;
 }
 
@@ -538,7 +542,7 @@ int main()
     std::cout << "Is purple's member variable 'rides' equal to 5? " << (purple.rides == 5 ? " Yes" : " No") << "\n" << std::endl;
 
     Facility allStudios;
-    allStudios.chargeCleaningFee( 1, 10);
+    allStudios.chargeCleaningFee( 0, 100);
 
     std::cout << "Add cleaning fee after " << allStudios.hoursBooked << " hours." << std::endl;
 
