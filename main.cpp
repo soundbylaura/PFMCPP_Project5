@@ -86,21 +86,26 @@ namespace Example
 
 struct Facility
 {
-    Facility ( int c = 1 ) : hoursBooked(c) { std::cout << "Facility ctor" << std::endl; }
-    int hoursBooked = 8;
+    Facility ( int c = 20 ) : hoursBooked(c) { std::cout << "Facility ctor" << std::endl; }
+    int hoursBooked;
+    int threshold = 8;
+    int laborFee = 100;
+    int facilityFee = 110;
     ~Facility () { std::cout << "Facility dtor" << std::endl; }
 
-    int chargeCleaningFee( int start, int laborFee );
+    int chargeCleaningFee( int start, int cleaningFee );
 };
 
-int Facility::chargeCleaningFee( int start, int laborFee )
+int Facility::chargeCleaningFee( int start, int cleaningFee )
 {
     Facility c(start);
     while( c.hoursBooked <= 10 )
     {
         ++c.hoursBooked;
-        return c.hoursBooked + laborFee;      
+        if ( c.hoursBooked >= threshold )
+            std::cout << "Add cleaning fees after " << this->hoursBooked << " hours." << std::endl;
     }
+    std::cout << "Total fees: $" << hoursBooked * (facilityFee + cleaningFee) << std::endl;
     return 0;
 }
 
@@ -178,6 +183,7 @@ void RecordingStudio::ControlRoom::bookRoom( bool isRoomBooked, int numberOfTota
     if( isRoomBooked == true )
     {
         numberOfTotalClients = 2;
+        std::cout << "Room booked " << this->isBooked << "at $" << this->ratePerHour << " dollars/min." << std::endl;
     }
     else
     {
@@ -212,7 +218,10 @@ float RecordingStudio::ControlRoom::caclulateTotalFee( float numberOfActualHours
     return ( overtimeRate * numberOfActualHours) + reelsUsed;  
 }
 
-void RecordingStudio::sendInvoice(){}
+void RecordingStudio::sendInvoice()
+{
+    std::cout << "Are we hosting an event tomorrow:" << (this->employees == 0 ? " Yes" : " No") << "\n" << std::endl;
+}
 void RecordingStudio::hostEvent()
 {
     std::cout << "After the compiler allocates the space required by the type, it calls a special function called the constructor." << std::endl;
@@ -227,7 +236,7 @@ void RecordingStudio::ControlRoom::resetLights ( int hoursTotal)
     }
     std::cout << "Lights reset after " << hoursTotal << " hours." << std::endl;
 }
-
+//small change
 
 /*
  copied UDT 2:
@@ -264,7 +273,7 @@ struct StereoWidenerAudioPlugin
         void prepareToPlay( double sampleRate, int samplesPerBlock);
         bool getBypassState( bool customBypassButton, bool nativeBypassButton);
         void calculateTickMarks();
-        void useSaturation(); //NTS: new member function added for S&L task
+        void useSaturation(); 
     };
 
     void increaseWetness( MixKnob increase);
@@ -274,7 +283,7 @@ struct StereoWidenerAudioPlugin
     void captureAudio();
     char addTextInfo();
     float widenSignal();
-    void showPluginWindow( float mem); //NTS: new member function added for S&L task
+    void showPluginWindow( float mem);
 };
 
 void StereoWidenerAudioPlugin::increaseWetness( MixKnob increase)
@@ -332,12 +341,14 @@ bool StereoWidenerAudioPlugin::MixKnob::getBypassState( bool customBypassButton,
 void StereoWidenerAudioPlugin::captureAudio()
 {
     std::cout << "captureAudio func: Constructors don't have a return type, not even VOID." << std::endl;
+    std::cout << "That knob color should be: " << this->knobsColors << "\n" << std::endl;
 }
 char StereoWidenerAudioPlugin::addTextInfo() { return 't'; }
 float StereoWidenerAudioPlugin::widenSignal() { return 100.0f; }
 void StereoWidenerAudioPlugin::MixKnob::calculateTickMarks()
 {
     std::cout << "calcTicksNum func: Ticks number: " << ticksOnSlider << std::endl;
+    std::cout << "The name of that knob should be: " << this->label << "\n" << std::endl;
 }
 
 void StereoWidenerAudioPlugin::MixKnob::useSaturation()
@@ -380,6 +391,7 @@ struct Bicycle
         int minNumSpokes = 0;
 
         void repairSpokes( int spokeNumber );
+        void replaceSpokes();
     };
 
     void transportPerson();
@@ -389,7 +401,7 @@ struct Bicycle
 
 void Bicycle::makeRepairs()
 {
-    std::cout << "Make repairs after this many rides: " << rides << std::endl;
+    std::cout << "Waterbottle holders installed: " << this->bottleHolders << std::endl;
 }
 
 void Bicycle::transportPerson()
@@ -402,6 +414,7 @@ void Bicycle::rollDownhill()
     std::cout << "Roll downhill initial ppi: " << tireAirPressure << ". Required bottle holders: " << bottleHolders << std::endl; //making a member function use initialized member variables via std::cout
 }
 
+
 void Bicycle::Spokes::repairSpokes( int spokeNumber )
 {
     while( spokeNumber < 8)
@@ -412,6 +425,12 @@ void Bicycle::Spokes::repairSpokes( int spokeNumber )
             std::cout << "All spokes fixed." << std::endl;
     } 
 }
+
+void Bicycle::Spokes::replaceSpokes()
+{
+    std::cout << "# of spokes replaced: " << this->maxNumSpokes << std::endl;
+}
+
 /*
  new UDT 4:
  with 2 member functions
@@ -442,9 +461,12 @@ bool BigBoxStore::installSparklySpokes( bool newCustomer,  bool newSpokes)
     if( newCustomer == true )
     { 
         newSpokes = true;
+        std::cout << "How many gears do the old bikes have? " << this->newBikes.numGears << "\n" << std::endl;
     }
     return true;
 }
+
+
 
 /*
  new UDT 5:
@@ -468,11 +490,13 @@ struct FancEQ
     void addNewCustomer();
 };
 
+
 bool FancEQ::useDefaultKnob( bool newKnob, bool purpleKnob)
 {
     if( newKnob == false )
     {
         purpleKnob = true;
+        std::cout << "The # of new customers is: " << this->newCustomer.numOfClients + 1 << "\n" << std::endl;
     }
     return false;
 }
@@ -507,19 +531,27 @@ int main()
     purple.rollDownhill();
     purple.makeRepairs();
 
+    std::cout << "Water bottle holders installed: " << purple.bottleHolders << std::endl;
+
 
     Bicycle::Spokes wheel;
     wheel.repairSpokes ( 0 );
+    wheel.replaceSpokes();
+    std::cout << "Spokes replaced: " << wheel.maxNumSpokes << std::endl;
 
     std::cout << "Is purple's member variable 'rides' equal to 5? " << (purple.rides == 5 ? " Yes" : " No") << "\n" << std::endl;
 
     Facility allStudios;
-    allStudios.chargeCleaningFee( 1, 10);
+    allStudios.chargeCleaningFee( 0, 100);
+
+    std::cout << "Add cleaning fee after " << allStudios.hoursBooked << " hours." << std::endl;
 
     RecordingStudio soundbylaura;//NTS: Creates an instance of the RecordingStudio struct named soundbylaura.
     RecordingStudio::ControlRoom  controlRoomB;//NTS: Creates an instance of the nested RecordingStudio::ControlRoom struct named controlRoomB.
 
-    // controlRoomB.bookRoom( true, 5);
+    controlRoomB.bookRoom( true, 5);
+    std::cout << "Room booked " << controlRoomB.isBooked << "at $" << controlRoomB.ratePerHour << " dollars/hr." << std::endl;
+    
     controlRoomB.prepareRoom( true, true, 1, 5.0f); 
     // controlRoomB.caclulateTotalFee( 12.0f, 650.50f, 4.0f);
     controlRoomB.resetLights ( 10); //NTS: this is the function that is calling the ctor&dtor 10 times
@@ -566,9 +598,16 @@ int main()
     walmazon.sellNewBikes();
     walmazon.installSparklySpokes( true,  true);
 
+    std::cout << "How many gears do the new bikes have? " << (walmazon.newBikes.numGears) << "\n" << std::endl;
+
+    
+    // std::cout << "Is the store selling new bikes?" << (walmazon.newBikes) << "\n" << std::endl;
+
     FancEQ instance;
     instance.useDefaultKnob( false, true);
     instance.addNewCustomer();
+
+    std::cout << "The number of new customers is: " << (instance.newCustomer.numOfClients) + 1 << "\n" << std::endl;
 
     std::cout << "good to go!" << std::endl;
 }
