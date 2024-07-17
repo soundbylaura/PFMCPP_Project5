@@ -103,7 +103,7 @@ int Facility::chargeCleaningFee( int start, int cleaningFee )
     {
         ++c.hoursBooked;
         if ( c.hoursBooked >= threshold )
-        std::cout << "Add cleaning fees after " << this->hoursBooked << " hours." << std::endl;
+            std::cout << "Add cleaning fees after " << this->hoursBooked << " hours." << std::endl;
     }
     std::cout << "Total fees: $" << hoursBooked * (facilityFee + cleaningFee) << std::endl;
     return 0;
